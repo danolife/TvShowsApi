@@ -59,7 +59,9 @@ class DefaultController extends Controller
         if ($response['result'] == "OK") {
             $token = $response['access_token'];
             $session = new Session();
-            $session->start();
+            if(!$session->getId()) {
+                $session->start();
+            }
             $session->set('access_token', $token);
             return $this->redirectToRoute('shows');
         } else {
