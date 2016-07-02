@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>To watch</h1>
+    {% for episode in episodes %}
+        {% set search = episode.show.name|lower ~ " S" ~ "%02d"|format(episode.season_number) ~ "E" ~ "%02d"|format(episode.number) %}
+        <p>{{ search }}</p>
+        <a href="https://kat.cr/usearch/{{ search }}" target="_blank">Link</a>
+    {% endfor %}
+{% endblock %}
