@@ -88,7 +88,7 @@ class DefaultController extends Controller
         $response = json_decode($curl->response, true);
 
         if($response['result'] == 'OK') {
-            $katPrefix = "https://kat.cr/usearch/";
+            /*$katPrefix = "https://kat.cr/usearch/";
             foreach ($response['episodes'] as $episode) {
                 $search = strtolower($episode['show']['name'])." S".sprintf("%02d", $episode['season_number'])."E".sprintf("%02d", $episode['number']);
                 $curl = new Curl();
@@ -96,7 +96,7 @@ class DefaultController extends Controller
                 $curl->get($katPrefix.str_replace(' ', '%20', $search));
                 dump($curl->response);
             }
-            die();
+            die();*/
 
             return $this->render('default/shows.html.twig', array('episodes' => $response['episodes']));
         } else {
