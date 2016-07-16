@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     <h1>To watch</h1>
-    {#{% for episode in episodes %}
-        {% set search = episode.show.name|lower ~ " S" ~ "%02d"|format(episode.season_number) ~ "E" ~ "%02d"|format(episode.number) %}
-        <div><a href="https://kat.cr/usearch/{{ search }}" target="_blank">{{ search }}</a></div>
-        <pre>{{ episode | json_encode }}</pre>
-    {% endfor %}#}
-    {% for index, value in apiReturn %}
+    
+    {% for index, show in apiReturn %}
+
         {% set episode = episodes[index] %}
         {{ episode.show.name ~ " S" ~ "%02d"|format(episode.season_number) ~ "E" ~ "%02d"|format(episode.number) }}
-        {% for searchResults in value.list %}
+
+        {% for searchResults in show.list %}
             <br/>> <a href="{{ searchResults.torrentLink }}" download="">{{ searchResults.title }}</a>
         {% else %}
             <br/>> No results for keywords "{{ keywords[index] }}"
         {% endfor %}
         <br/><br/>
+
     {% endfor %}
+
 {% endblock %}
