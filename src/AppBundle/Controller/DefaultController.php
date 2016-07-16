@@ -112,7 +112,9 @@ class DefaultController extends Controller
                 $curl = new Curl();
                 $curl->get($katPrefix.urlencode($search));
                 $keywords[] = $search;
-                $apiReturn[] = json_decode($curl->response, true);
+                $apiReturnTemp = json_decode($curl->response, true);
+                $apiReturnTemp['list'] = array_slice($apiReturnTemp['list'], 0, 5);
+                $apiReturn[] = $apiReturnTemp;
             }
 
             return $this->render('default/shows.html.twig', array(
