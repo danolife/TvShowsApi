@@ -42,7 +42,7 @@ class ShowHelper
             'client_id' => $this->container->getParameter('client_id'),
             'client_secret' => $this->container->getParameter('client_secret'),
             'code' => $code,
-            'redirect_uri' => $this->container->get('router')->generate('shows', array(), UrlGeneratorInterface::ABSOLUTE_URL)
+            'redirect_uri' => $this->container->get('router')->generate('list', array(), UrlGeneratorInterface::ABSOLUTE_URL)
         ));
 
         return json_decode($curl->response, true);
