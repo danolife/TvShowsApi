@@ -107,7 +107,7 @@ class DefaultController extends Controller
             $keywords = array();
             foreach ($response['episodes'] as $episode) {
                 $showName = strtolower($episode['show']['name']);
-                $showName = trim(str_replace(array('.', "'"), ' ', $showName));
+                $showName = trim(str_replace(array('.', "'"), '', $showName));
                 $search = $showName." S".sprintf("%02d", $episode['season_number'])."E".sprintf("%02d", $episode['number']);
                 $curl = new Curl();
                 $curl->get($katPrefix.urlencode($search));

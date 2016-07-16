@@ -11,7 +11,7 @@
         {% set episode = episodes[index] %}
         {{ episode.show.name ~ " S" ~ "%02d"|format(episode.season_number) ~ "E" ~ "%02d"|format(episode.number) }}
         {% for searchResults in value.list %}
-            <br/>> <a href="{{ searchResults.torrentLink }}">{{ searchResults.title }}</a>
+            <br/>> <a href="{{ searchResults.torrentLink }}" download="">{{ searchResults.title }}</a>
         {% else %}
             <br/>> No results for keywords "{{ keywords[index] }}"
         {% endfor %}
