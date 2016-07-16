@@ -21,7 +21,7 @@ class DefaultController extends BaseController
     public function indexAction()
     {
         if($this->get('show_helper')->isLoggedIn()) {
-            return $this->redirectToRoute('shows');
+            return $this->redirectToRoute('list');
         }
 
         $codeRequestUrl = $this->get('show_helper')->getCodeRequestUrl();
@@ -62,18 +62,18 @@ class DefaultController extends BaseController
                 $session->start();
             }
             $session->set('access_token', $token);
-            return $this->redirectToRoute('shows');
+            return $this->redirectToRoute('list');
         } else {
             return $this->render('AppBundle::apiError.html.twig', array('errorMessage' => $response['message']));
         }
     }
 
     /**
-     * @Route("/shows", name="shows")
+     * @Route("/list", name="list")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showsAction(Request $request)
+    public function listAction(Request $request)
     {
         if(!$this->get('show_helper')->isLoggedIn()) {
             return $this->redirectToRoute('login');
@@ -96,7 +96,7 @@ class DefaultController extends BaseController
                 $apiReturn[] = $apiReturnTemp;
             }
 
-            return $this->render('AppBundle::shows.html.twig', array(
+            return $this->render('AppBundle::list.html.twig', array(
                 'episodes' => $toWatchList['episodes'],
                 'apiReturn' => $apiReturn,
                 'keywords' => $keywords
