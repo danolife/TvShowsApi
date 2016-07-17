@@ -4,7 +4,7 @@
 parameters:
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
+    database_name:     shows
     database_user:     root
     database_password: ~
     # You should uncomment this if you want use pdo_sqlite
@@ -18,5 +18,6 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    # TVShowTime client id and secret
     client_id: QiELLt4riIVJCxDhshZn
     client_secret: -UIjzexvB3nLax4pP8-2l6jAj71sCY9KHHUcqBOp
