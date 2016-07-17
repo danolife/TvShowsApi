@@ -78,4 +78,13 @@ class ShowHelper
         return $formatted;
     }
 
+    public function orderListBy(&$list, $criteria)
+    {
+        $sort = array();
+        foreach($list as $key => $value) {
+            $sort[$key] = $value[$criteria];
+        }
+        array_multisort($sort, SORT_ASC, $list);
+    }
+
 }

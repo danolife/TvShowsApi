@@ -4,7 +4,7 @@
 
     <h1>To watch</h1>
     
-    {% for index, show in apiReturn %}
+    {#{% for index, show in apiReturn %}
 
         {% set episode = episodes[index] %}
         {{ episode.show.name ~ " S" ~ "%02d"|format(episode.season_number) ~ "E" ~ "%02d"|format(episode.number) }}
@@ -16,6 +16,22 @@
         {% endfor %}
         <br/><br/>
 
+    {% endfor %}#}
+
+    {% for index, value in data %}
+
+        {% set episode = value.episode %}
+        {{ episode.show.name ~ " S" ~ "%02d"|format(episode.season_number) ~ "E" ~ "%02d"|format(episode.number) }}
+
+        {% for searchResults in value.apiReturn.list %}
+            <br/>> <a href="{{ searchResults.torrentLink }}" download="">{{ searchResults.title }}</a>
+            {{ (searchResults.size / (1024 * 1024)) | round(1) ~' MB' }}
+        {% else %}
+            <br/>> No results for keywords "{{ value.keywords }}"
+        {% endfor %}
+        <br/><br/>
+
     {% endfor %}
+
 
 {% endblock %}

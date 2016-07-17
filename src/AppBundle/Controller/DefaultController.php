@@ -82,8 +82,7 @@ class DefaultController extends BaseController
         $toWatchList = $this->get('show_helper')->getToWatchList();
 
         if($toWatchList['result'] == 'OK') {
-            $apiReturn = array();
-            $keywords = array();
+            $data = array();
             foreach ($toWatchList['episodes'] as $episode) {
                 $search = $this->get('show_helper')->formatEpisodeName(
                     $episode['show']['name'],
@@ -91,15 +90,17 @@ class DefaultController extends BaseController
                     $episode['number']
                 );
                 $apiReturnTemp = $this->get('show_helper')->katSearch($search);
-                $keywords[] = $search;
                 $apiReturnTemp['list'] = array_slice($apiReturnTemp['list'], 0, 5);
-                $apiReturn[] = $apiReturnTemp;
+                $this->get('show_helper')->orderListBy($apiReturnTemp['list'], 'size');
+                $data[] = array(
+                    'episode' => $episode,
+                    'keywords' => $search,
+                    'apiReturn' => $apiReturnTemp
+                );
             }
 
             return $this->render('AppBundle::list.html.twig', array(
-                'episodes' => $toWatchList['episodes'],
-                'apiReturn' => $apiReturn,
-                'keywords' => $keywords
+                'data' => $data
             ));
         } else {
             return $this->render('AppBundle::apiError.html.twig', array('errorMessage' => $toWatchList['message']));
